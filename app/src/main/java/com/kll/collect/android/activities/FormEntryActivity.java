@@ -862,8 +862,6 @@ public class FormEntryActivity extends Activity implements AnimationListener,
 			File newImage = new File(destImagePath);
 			FileUtils.copyFile(source, newImage);
 
-			if(compressImage)
-				compreesImage(destImagePath);
 
 			((ODKView) mCurrentView).setBinaryData(newImage);
 			saveAnswersForCurrentScreen(DO_NOT_EVALUATE_CONSTRAINTS);
@@ -2353,6 +2351,24 @@ public class FormEntryActivity extends Activity implements AnimationListener,
 	 */
 	private boolean saveDataToDisk(boolean exit, boolean complete,
 			String updatedSaveName) {
+
+		//
+		mRecord_Id = getLatestUniqueIdFromDb(getValueFromUserInput("district"),getValueFromUserInput("vdc"), getValueFromUserInput("ward"),getValueFromUserInput("enumeration_area"));
+
+        Intent intent = getIntent();
+        if (intent != null)	{
+            Uri uri = intent.getData();
+            if (Collect.getInstance().getContentResolver().getType(uri).equals(InstanceColumns.CONTENT_ITEM_TYPE)){
+                if (getValueFromUserInput("district").equals(firstLoadDistrict)
+                        && getValueFromUserInput("vdc").equals(firstLoadVdc)
+                        && getValueFromUserInput("ward").equals(firstLoadWard)
+                        && getValueFromUserInput("enumeration_area").equals(firstLoadEnumArea)){
+                    mRecord_Id = firstLoadRecordId;
+                }
+            }
+        }
+
+
 		// save current answer
 		if (!saveAnswersForCurrentScreen(complete)) {
 			Toast.makeText(this, getString(R.string.data_saved_error),
@@ -3208,7 +3224,7 @@ public class FormEntryActivity extends Activity implements AnimationListener,
         }
         vdcIndex = formController.getIndexFromXPath("question./NHRP_dec_4/building_damage_assessment[1]/hh_data[1]/hh_address[1]/hh_address_vdc[1]/vdc[1]");
         if (vdcIndex == null){
-            vdcIndex = formController.getIndexFromXPath("question./Training_form_dec21/building_damage_assessment[1]/hh_data[1]/hh_address[1]/vdc[1]");
+            vdcIndex = formController.getIndexFromXPath("question./Training_form_dec21/building_damage_assessment[1]/hh_data[1]/hh_address[1]/hh_address_vdc[1]/vdc[1]");
             Log.wtf("VDC","Index Still Null");
         }
         wardIndex = formController.getIndexFromXPath("question./NHRP_dec_4/building_damage_assessment[1]/hh_data[1]/hh_address[1]/hh_address_ward[1]/ward[1]");
@@ -3229,7 +3245,7 @@ public class FormEntryActivity extends Activity implements AnimationListener,
         }
         surveyorIdIndex = formController.getIndexFromXPath("question./NHRP_dec_4/building_damage_assessment[1]/start_page[1]/enumerator_id[1]");
         if (surveyorIdIndex == null){
-            surveyorIdIndex = formController.getIndexFromXPath("question./Training_form_dec21/enumerator_id[1]");
+            surveyorIdIndex = formController.getIndexFromXPath("question./Training_form_dec21/building_damage_assessment[1]/start_page[1]/enumerator_id[1]");
             Log.wtf("Surveyor ID", "Index Still Null");
         }
     }
@@ -3253,6 +3269,8 @@ public class FormEntryActivity extends Activity implements AnimationListener,
                 compositeInstance.moveToFirst();
                 if (Collect.getInstance().getContentResolver().getType(uri).equals(InstanceColumns.CONTENT_ITEM_TYPE) || isSaved) {
                     return compositeInstance.getInt(compositeInstance.getColumnIndex(InstanceColumns.RECORDID)) + 1;
+                }else if (isSaved){
+                    return compositeInstance.getInt(compositeInstance.getColumnIndex(InstanceColumns.RECORDID));
                 }else{
                     return compositeInstance.getInt(compositeInstance.getColumnIndex(InstanceColumns.RECORDID)) + 1;
                 }
