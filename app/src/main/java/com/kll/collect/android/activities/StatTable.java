@@ -216,7 +216,7 @@ public class StatTable extends Activity implements DiskSyncListener{
         }
         Log.i("Total form",Integer.toString(formNames.size()));
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String curDate = sdf.format(new Date());
         Log.i("Current Date",curDate);
         sdf = new SimpleDateFormat("yyyy-MM-dd 00:00:00");
@@ -267,7 +267,7 @@ public class StatTable extends Activity implements DiskSyncListener{
         }
         Log.i("Total form",Integer.toString(formNames.size()));
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String curDate = sdf.format(new Date());
         Log.i("Current Date",curDate);
         sdf = new SimpleDateFormat("yyyy-MM-dd 00:00:00");
