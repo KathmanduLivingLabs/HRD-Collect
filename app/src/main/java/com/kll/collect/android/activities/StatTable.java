@@ -176,9 +176,9 @@ public class StatTable extends Activity implements DiskSyncListener{
                 String imei = telephonyManager.getDeviceId();
 
                 for (int i = 0; i < overallStats.size(); i++) {
-                   // if (overallStats.get(i).getFormID().equals("NHRP_dec_4")) {
+                    if (overallStats.get(i).getFormID().equals("NHRP_dec_4")) {
                         smsBody = smsBody + seperator + Integer.toString(overallStats.get(i).getNot_sent()) + seperator + imei + seperator + Integer.toString(overallStats.get(i).getAllSent()) + seperator + Integer.toString(overallStats.get(i).getNo_attachment());
-                    //}
+                    }
 
                     }
                 Log.i("Message", smsBody);
@@ -205,12 +205,14 @@ public class StatTable extends Activity implements DiskSyncListener{
             mDiskSyncTask.execute((Void[]) null);
         }
         ArrayList<String> formNames = new ArrayList<String>();
+        ArrayList<String> formId = new ArrayList<String>();
 
         String sortOrder = FormsProviderAPI.FormsColumns.DISPLAY_NAME + " ASC, " + FormsProviderAPI.FormsColumns.JR_VERSION + " DESC";
         Cursor c = managedQuery(FormsProviderAPI.FormsColumns.CONTENT_URI, null, null, null, sortOrder);
         c.moveToFirst();
         for(int j = 0;j < c.getCount();j++){
             formNames.add(c.getString(c.getColumnIndex("displayName")));
+            formId.add(c.getString(c.getColumnIndex("jrFormId")));
             c.moveToNext();
 
         }
@@ -237,11 +239,12 @@ public class StatTable extends Activity implements DiskSyncListener{
         for(int j = 0;j<formNames.size();j++) {
             overallStat = new InstanceStatProvider();
             overallStat.setFormName(formNames.get(j));
+            overallStat.setFormID(formId.get(j));
             Log.i("Form name",formNames.get(j));
-            overallStat.setCompleted((getCompletedCursor(formNames.get(j), finalDate, curDate)).getCount());
-            overallStat.setSent((getSentCursor(formNames.get(j), finalDate, curDate)).getCount());
-            overallStat.setNo_attachment((getNo_attachmentCursor(formNames.get(j), finalDate, curDate)).getCount());
-            overallStat.setNot_sent((getNot_sentCursor(formNames.get(j), finalDate, curDate)).getCount());
+            overallStat.setCompleted((getCompletedCursor(formId.get(j), finalDate, curDate)).getCount());
+            overallStat.setSent((getSentCursor(formId.get(j), finalDate, curDate)).getCount());
+            overallStat.setNo_attachment((getNo_attachmentCursor(formId.get(j), finalDate, curDate)).getCount());
+            overallStat.setNot_sent((getNot_sentCursor(formId.get(j), finalDate, curDate)).getCount());
             overallStats.add(overallStat);
         }
     }
