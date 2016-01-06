@@ -20,7 +20,10 @@
         android:text="@string/geoodk_mainTitle"
         android:textSize="18sp"
         android:textStyle="bold" />
-
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -119,19 +122,20 @@
                 android:gravity="center">
 
                 <ImageButton
-                    android:id="@+id/geoodk_map_butt"
+                    android:id="@+id/geoodk_update_butt"
                     android:layout_width="100.0dip"
                     android:layout_height="100.0dip"
                     android:background="@drawable/state_color"
+                    android:gravity="center_horizontal"
                     android:src="@drawable/map_data" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/geoodk_map_butt"
+                    android:layout_below="@+id/geoodk_update_butt"
                     android:layout_marginLeft="20.0dip"
                     android:clickable="false"
-                    android:text="Map Data" />
+                    android:text="Update Questionnare" />
             </RelativeLayout>
         </LinearLayout>
 
@@ -246,9 +250,6 @@
         </LinearLayout>
     </LinearLayout>
 
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"></ScrollView>
+</ScrollView>
 
 </LinearLayout>
