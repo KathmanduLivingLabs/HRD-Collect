@@ -127,15 +127,20 @@
                     android:layout_height="100.0dip"
                     android:background="@drawable/state_color"
                     android:gravity="center_horizontal"
-                    android:src="@drawable/map_data" />
+                    android:clickable="false"
+                    android:src="@drawable/update_disable"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignRight="@+id/geoodk_update_txt"
+                    android:layout_marginRight="13dp" />
 
                 <TextView
+                    android:id="@+id/geoodk_update_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/geoodk_update_butt"
                     android:layout_marginLeft="20.0dip"
                     android:clickable="false"
-                    android:text="Update Questionnare" />
+                    android:text="Update Questionnaire" />
             </RelativeLayout>
         </LinearLayout>
 

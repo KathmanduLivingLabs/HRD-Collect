@@ -348,6 +348,7 @@
     <string name="default_sms_reciever">7001</string>
     <string name="default_sms_receiver">7001</string>
     <string name="default_save_name">save_name</string>
+    <string name="file_update_ok">Forms successfully updated</string>
 
 
 </resources>

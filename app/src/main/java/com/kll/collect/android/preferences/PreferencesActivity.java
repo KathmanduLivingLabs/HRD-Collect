@@ -102,6 +102,8 @@ public class PreferencesActivity extends PreferenceActivity implements
 	public static final String KEY_NAVIGATION = "navigation";
 	public static final String KEY_CONSTRAINT_BEHAVIOR = "constraint_behavior";
 
+	public static final String KEY_UPDATE_AVAILABLE = "update_available";
+
 	private PreferenceScreen mSplashPathPreference;
 	private EditTextPreference mSubmissionUrlPreference;
 	private EditTextPreference mFormListUrlPreference;
