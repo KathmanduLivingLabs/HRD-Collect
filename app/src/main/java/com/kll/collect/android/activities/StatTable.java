@@ -247,6 +247,13 @@ public class StatTable extends Activity implements DiskSyncListener{
             overallStat.setNot_sent((getNot_sentCursor(formId.get(j), finalDate, curDate)).getCount());
             overallStats.add(overallStat);
         }
+        for(int count1 = 0;count1<overallStats.size();count1++){
+            for(int count2 = 0;count2<overallStats.size();count2++){
+                if(overallStats.get(count1).getFormID().equals(overallStats.get(count2).getFormID())){
+                    overallStats.remove(count2);
+                }
+            }
+        }
     }
 
     private void generateStat(int i) {
@@ -321,7 +328,13 @@ public class StatTable extends Activity implements DiskSyncListener{
             instanceStat.setNot_sent((getNot_sentCursor(formId.get(j), finalDate, curDate)).getCount());
             instanceStatProviders.add(instanceStat);
         }
-
+        for(int count1 = 0;count1<instanceStatProviders.size();count1++){
+            for(int count2 = 0;count2<instanceStatProviders.size();count2++){
+                if(instanceStatProviders.get(count1).getFormID().equals(instanceStatProviders.get(count2).getFormID())){
+                    instanceStatProviders.remove(count2);
+                }
+            }
+        }
         populateStat(instanceStatProviders);
 
     }
