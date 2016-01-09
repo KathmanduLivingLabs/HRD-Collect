@@ -735,6 +735,17 @@ public class GeoODK extends Activity implements FormListDownloaderListener,
         SharedPreferences.Editor e = mSharedPrefrence.edit();
         e.putBoolean(PreferencesActivity.KEY_UPDATE_AVAILABLE,false);
         e.commit();
+        ImageButton update_but = (ImageButton) findViewById(R.id.geoodk_update_butt);
+        TextView update_txt = (TextView) findViewById(R.id.geoodk_update_txt);
+        if (mSharedPrefrence.getBoolean(PreferencesActivity.KEY_UPDATE_AVAILABLE, false)) {
+            update_but.setEnabled(true);
+            update_but.setImageResource(R.drawable.update_enable);
+            update_txt.setTextColor(mDefaultTxtColor);
+        }else{
+            update_but.setEnabled(false);
+            update_but.setImageResource(R.drawable.update_disable);
+            update_txt.setTextColor(Color.parseColor("#efefef"));
+        }
         createAlertDialog(getString(R.string.download_forms_result), b.toString().trim(), EXIT);
     }
     @Override

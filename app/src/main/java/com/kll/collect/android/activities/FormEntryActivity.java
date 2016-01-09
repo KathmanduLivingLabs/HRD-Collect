@@ -621,10 +621,8 @@ public class FormEntryActivity extends Activity implements AnimationListener,
 							}
 							if (!defaultCachePresent) {
 								String jrFormId = c.getString(c.getColumnIndex(FormsColumns.JR_FORM_ID));
-								String jrVersion = c.getString(c.getColumnIndex(FormsColumns.JR_VERSION));
-								String[] selectionArgs = new String[]{jrFormId, jrVersion};
-								String selection = FormsColumns.JR_FORM_ID + "=? AND "
-										+ FormsColumns.JR_VERSION + "=?";
+								String[] selectionArgs = new String[]{jrFormId};
+								String selection = FormsColumns.JR_FORM_ID + "=?";
 								String sortOrder = InstanceColumns.LAST_STATUS_CHANGE_DATE + " DESC";
 								Cursor latestInstance = managedQuery(InstanceColumns.CONTENT_URI, null, selection, selectionArgs, sortOrder);
 								Log.wtf("WTF",String.valueOf(latestInstance.getCount()));
@@ -3259,10 +3257,9 @@ public class FormEntryActivity extends Activity implements AnimationListener,
             Cursor c = getContentResolver().query(uri, null, null, null, null);
             c.moveToFirst();
             String formid = c.getString(c.getColumnIndex(FormsColumns.JR_FORM_ID));
-            String formversion = c.getString(c.getColumnIndex(FormsColumns.JR_VERSION));
-            String[] selectionArgs = new String[]{formid, formversion, distrct, vdc, ward, enum_area};
+            String[] selectionArgs = new String[]{formid, distrct, vdc, ward, enum_area};
             String selection = InstanceColumns.JR_FORM_ID + "=? AND "
-                    + InstanceColumns.JR_VERSION + "=? AND " + InstanceColumns.DISTRICT + "=? AND " + InstanceColumns.VDC + "=? AND " + InstanceColumns.WARD + "=? AND " + InstanceColumns.ENUMAREA + "=?";
+                    + InstanceColumns.DISTRICT + "=? AND " + InstanceColumns.VDC + "=? AND " + InstanceColumns.WARD + "=? AND " + InstanceColumns.ENUMAREA + "=?";
             String sortOrder = InstanceColumns.RECORDID + " DESC";
             Cursor compositeInstance = managedQuery(InstanceColumns.CONTENT_URI, null, selection, selectionArgs, sortOrder);
             if (compositeInstance.getCount() >= 1) {
