@@ -18,6 +18,7 @@ import com.kll.collect.android.R;
 
 import com.kll.collect.android.application.Collect;
 import com.kll.collect.android.listeners.DiskSyncListener;
+import com.kll.collect.android.provider.FormsProviderAPI;
 import com.kll.collect.android.provider.FormsProviderAPI.FormsColumns;
 import com.kll.collect.android.tasks.DiskSyncTask;
 import com.kll.collect.android.utilities.VersionHidingCursorAdapter;
@@ -37,6 +38,8 @@ import android.view.Window;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 /**
  * Responsible for displaying all the valid forms in the forms directory. Stores the path to
@@ -74,6 +77,53 @@ public class FormChooserList extends ListActivity implements DiskSyncListener {
         String sortOrder = FormsColumns.DISPLAY_NAME + " ASC, " + FormsColumns.JR_VERSION + " DESC";
         Cursor c = managedQuery(FormsColumns.CONTENT_URI, null, null, null, sortOrder);
 
+        ArrayList<String> formId = new ArrayList<String>();
+        ArrayList<String> formVersion = new ArrayList<String>();
+        ArrayList<String> formIdTemp = new ArrayList<String>();
+        ArrayList<String> formVersionTemp = new ArrayList<String>();
+        c.moveToFirst();
+        for(int i = 0;i<c.getCount();i++){
+            formId.add(c.getString(c.getColumnIndex(FormsProviderAPI.FormsColumns.JR_FORM_ID)));
+            formVersion.add(c.getString(c.getColumnIndex(FormsProviderAPI.FormsColumns.JR_VERSION)));
+            c.moveToNext();
+
+        }
+        formIdTemp = formId;
+        formVersionTemp = formVersion;
+
+        for (int x = 0;x<formId.size();x++){
+
+            for(int y = x+1;y<formId.size();y++){
+                if (formId.get(x).equals(formId.get(y))){
+                    Log.i("Version 1 ",formVersion.get(x));
+                    Log.i("Version 2 ",formVersion.get(y));
+                    if(Double.parseDouble(formVersion.get(x))<Double.parseDouble(formVersion.get(y))){
+                            formId.remove(x);
+                            formVersion.remove(x);
+                           x--;
+                    }else {
+                        formId.remove(y);
+                        formVersion.remove(y);
+                        y--;
+                    }
+
+                }
+
+            }
+
+
+        }
+        String selection = "";
+        for(int pos = 0;pos<formId.size();pos++){
+            Log.i("form ID",formId.get(pos));
+            Log.i("form version",formVersion.get(pos));
+            if (selection.equals("")){
+                selection = ("("+ FormsColumns.JR_FORM_ID + "='"+formId.get(pos) + "' and " + FormsColumns.JR_VERSION + "='" +formVersion.get(pos) + "') ");
+            }else {
+                selection = selection + (" or ("+ FormsColumns.JR_FORM_ID + "='"+formId.get(pos) + "' and " + FormsColumns.JR_VERSION + "='" +formVersion.get(pos) + "')");
+            }
+        }
+        Cursor c1 = managedQuery(FormsColumns.CONTENT_URI, null, selection, null, sortOrder);
         String[] data = new String[] {
                 FormsColumns.DISPLAY_NAME, FormsColumns.DISPLAY_SUBTEXT, FormsColumns.JR_VERSION
         };
@@ -83,7 +133,9 @@ public class FormChooserList extends ListActivity implements DiskSyncListener {
 
         // render total instance view
         SimpleCursorAdapter instances =
-            new VersionHidingCursorAdapter(FormsColumns.JR_VERSION, this, R.layout.two_item, c, data, view);
+            new VersionHidingCursorAdapter(FormsColumns.JR_VERSION, this, R.layout.two_item, c1, data, view);
+
+
         setListAdapter(instances);
 
         if (savedInstanceState != null && savedInstanceState.containsKey(syncMsgKey)) {

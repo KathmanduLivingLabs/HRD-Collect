@@ -294,7 +294,8 @@ public class CheckForFormUpdateTask extends AsyncTask<Void, String, HashMap<Stri
                 //TODO query for this ID in db
                 String[] selectionArgs = new String[]{formid};
                 String selection = FormsProviderAPI.FormsColumns.JR_FORM_ID + "=?";
-                Cursor cursor = Collect.getInstance().getContentResolver().query(FormsProviderAPI.FormsColumns.CONTENT_URI, null, selection, selectionArgs, null);
+                String sortOrder = FormsProviderAPI.FormsColumns.DATE + " DESC";
+                Cursor cursor = Collect.getInstance().getContentResolver().query(FormsProviderAPI.FormsColumns.CONTENT_URI, null, selection, selectionArgs, sortOrder);
                 Log.wtf("Cursor Count", String.valueOf(cursor.getCount()));
                 if (cursor.getCount() > 0){
                     cursor.moveToFirst();

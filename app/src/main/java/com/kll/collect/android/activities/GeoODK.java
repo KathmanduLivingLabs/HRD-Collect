@@ -142,9 +142,9 @@ public class GeoODK extends Activity implements FormListDownloaderListener,
 
 	
     public static final String FORMS_PATH = Collect.ODK_ROOT + File.separator + "forms";
-	
 
-	@Override
+
+    @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.geoodk_layout);
@@ -164,11 +164,11 @@ public class GeoODK extends Activity implements FormListDownloaderListener,
         mSharedPrefrence = PreferenceManager.getDefaultSharedPreferences(this);
 
         boolean updateAvailable = mSharedPrefrence.getBoolean(PreferencesActivity.KEY_UPDATE_AVAILABLE, false);
+
         if (!updateAvailable){
+
             checkForUpdates();
         }
-
-
 
         TextView txtUpdate = (TextView) findViewById(R.id.geoodk_update_txt);
         mDefaultTxtColor = txtUpdate.getCurrentTextColor();
@@ -275,6 +275,7 @@ public class GeoODK extends Activity implements FormListDownloaderListener,
 		});
 
 
+
         mSharedPrefrence.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
@@ -293,6 +294,24 @@ public class GeoODK extends Activity implements FormListDownloaderListener,
         });
 
 		//End of Main activity
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ImageButton update_but = (ImageButton) findViewById(R.id.geoodk_update_butt);
+        TextView update_txt = (TextView) findViewById(R.id.geoodk_update_txt);
+        if (mSharedPrefrence.getBoolean(PreferencesActivity.KEY_UPDATE_AVAILABLE, false)) {
+            update_but.setEnabled(true);
+            update_but.setImageResource(R.drawable.update_enable);
+            update_txt.setTextColor(mDefaultTxtColor);
+        }else{
+            update_but.setEnabled(false);
+            update_but.setImageResource(R.drawable.update_disable);
+            update_txt.setTextColor(Color.parseColor("#efefef"));
+        }
+
     }
 
 
@@ -712,7 +731,10 @@ public class GeoODK extends Activity implements FormListDownloaderListener,
                     result.get(k));
             b.append("\n\n");
         }
-        deleteOldFiles();
+       // deleteOldFiles();
+        SharedPreferences.Editor e = mSharedPrefrence.edit();
+        e.putBoolean(PreferencesActivity.KEY_UPDATE_AVAILABLE,false);
+        e.commit();
         createAlertDialog(getString(R.string.download_forms_result), b.toString().trim(), EXIT);
     }
     @Override
@@ -800,9 +822,7 @@ public class GeoODK extends Activity implements FormListDownloaderListener,
             Toast.makeText(getApplicationContext(),
                     getString(R.string.file_update_ok, deletedForms),
                     Toast.LENGTH_SHORT).show();
-            SharedPreferences.Editor e = mSharedPrefrence.edit();
-            e.putBoolean(PreferencesActivity.KEY_UPDATE_AVAILABLE,false);
-            e.commit();
+
 
         } else {
             // had some failures
