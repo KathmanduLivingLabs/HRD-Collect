@@ -248,9 +248,10 @@ public class StatTable extends Activity implements DiskSyncListener{
             overallStats.add(overallStat);
         }
         for(int count1 = 0;count1<overallStats.size();count1++){
-            for(int count2 = 0;count2<overallStats.size();count2++){
+            for(int count2 = count1+1;count2<overallStats.size();count2++){
                 if(overallStats.get(count1).getFormID().equals(overallStats.get(count2).getFormID())){
                     overallStats.remove(count2);
+                    count2--;
                 }
             }
         }
@@ -329,9 +330,10 @@ public class StatTable extends Activity implements DiskSyncListener{
             instanceStatProviders.add(instanceStat);
         }
         for(int count1 = 0;count1<instanceStatProviders.size();count1++){
-            for(int count2 = 0;count2<instanceStatProviders.size();count2++){
+            for(int count2 = count1+1;count2<instanceStatProviders.size();count2++){
                 if(instanceStatProviders.get(count1).getFormID().equals(instanceStatProviders.get(count2).getFormID())){
                     instanceStatProviders.remove(count2);
+                    count2--;
                 }
             }
         }
