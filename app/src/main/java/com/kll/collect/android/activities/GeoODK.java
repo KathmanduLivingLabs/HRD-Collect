@@ -358,9 +358,7 @@ public class GeoODK extends Activity implements FormListDownloaderListener,
                 }).create();
         mAlertDialog.setIcon(android.R.drawable.ic_dialog_info);
         mAlertDialog.setTitle("Confirm Update");
-        mAlertDialog.setMessage("Please make sure all the previous data is finalized and uploaded before you update questionnaire. After the update you will be able " +
-                "to submit the old data but will not be able to edit or finalize" +
-                "it. Are you sure you want to update? ");
+        mAlertDialog.setMessage("If possible make sure all the previous data is finalized and uploaded before you update questionnaire. Do you want to proceed with the update? ");
         mAlertDialog.show();
     }
 

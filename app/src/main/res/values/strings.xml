@@ -14,7 +14,7 @@
 -->
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
 
-    <string name="accept_location">लोकेशन रेकर्ड गर्नुहोस</string>
+    <string name="accept_location">लोकेशन रेकर्ड गर्नुहोस्</string>
 
 
     <string name="accuracy">एक्युरेसी</string>
@@ -83,10 +83,10 @@
     <string name="file_missing">File: %s is missing.</string>
     <string name="finished_disk_scan">Finished scanning. All forms loaded.</string>
     <string name="forms">Blank Forms</string>
-    <string name="getting_location">उपयुक्त एक्युरेसी पाएपछि लोकेशन रेकोर्ड गर्नुहोस</string>
+    <string name="getting_location">उपयुक्त एक्युरेसी पाएपछि लोकेशन रेकोर्ड गर्नुहोस्</string>
     <string name="get_barcode">Get Barcode</string>
     <string name="get_forms">Get Blank Form</string>
-    <string name="get_location">लोकेशन रेकर्ड गर्नुहोस</string>
+    <string name="get_location">लोकेशन रेकर्ड गर्नुहोस्</string>
     <string name="provider_disabled_error">Sorry, Location providers are disabled!</string>
     <string name="invalid_answer_error">Sorry, this response is invalid!</string>
     <string name="jump_to_beginning">Go To Start</string>
@@ -123,7 +123,7 @@
     <string name="quit_entry">Save and Exit</string>
     <string name="refresh">Refresh</string>
     <string name="replace_barcode">Replace Barcode</string>
-    <string name="replace_location">लोकेशन परिवर्तन गर्नुहोस</string>
+    <string name="replace_location">लोकेशन परिवर्तन गर्नुहोस्</string>
     <string name="required_answer_error">Sorry, this response is required!</string>
     <string name="review_data">Edit Saved Form</string>
     <string name="review_data_button">Edit Saved Form (%s)</string>
