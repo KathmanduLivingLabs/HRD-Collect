@@ -245,6 +245,7 @@ public class StatTable extends Activity implements DiskSyncListener{
             overallStat.setSent((getSentCursor(formId.get(j), finalDate, curDate)).getCount());
             overallStat.setNo_attachment((getNo_attachmentCursor(formId.get(j), finalDate, curDate)).getCount());
             overallStat.setNot_sent((getNot_sentCursor(formId.get(j), finalDate, curDate)).getCount());
+            overallStat.setTotalPhoto(getTotalPhoto(formId.get(j),finalDate,curDate));
             overallStats.add(overallStat);
         }
         for(int count1 = 0;count1<overallStats.size();count1++){
@@ -256,6 +257,8 @@ public class StatTable extends Activity implements DiskSyncListener{
             }
         }
     }
+
+
 
     private void generateStat(int i) {
 
@@ -323,6 +326,7 @@ public class StatTable extends Activity implements DiskSyncListener{
             instanceStat.setFormName(formNames.get(j));
             instanceStat.setFormID(formId.get(j));
 
+            instanceStat.setTotalPhoto(getTotalPhoto(formId.get(j),finalDate,curDate));
             instanceStat.setCompleted((getCompletedCursor(formId.get(j), finalDate, curDate)).getCount());
             instanceStat.setSent((getSentCursor(formId.get(j), finalDate, curDate)).getCount());
             instanceStat.setNo_attachment((getNo_attachmentCursor(formId.get(j), finalDate, curDate)).getCount());
@@ -359,12 +363,31 @@ public class StatTable extends Activity implements DiskSyncListener{
         for (int i = 0;i<instanceStat.size();i++){
             ArrayList<String> child = new ArrayList<String>();
             child.add("सर्वे पुरा गरिएका घर संख्या = " + instanceStat.get(i).getCompleted());
-
             child.add("डाटा र फोटो दुवै अपलोड संख्या = " + instanceStat.get(i).getAllSent());
             child.add("डाटा मात्र अपलोड संख्या = " + instanceStat.get(i).getNo_attachment());
             child.add("अपलोड गर्न बाँकी संख्या = " + instanceStat.get(i).getNot_sent());
+            child.add("जम्मा फोटो संख्या = " + instanceStat.get(i).getTotalPhoto());
             listDataChild.put(listDataHeader.get(i), child);
         }
+    }
+    private Integer getTotalPhoto(String formId, String finalDate, String curDate) {
+        String selection =  "(" + InstanceProviderAPI.InstanceColumns.STATUS + "=? or "+ InstanceProviderAPI.InstanceColumns.STATUS + "=? ) and " + InstanceProviderAPI.InstanceColumns.JR_FORM_ID + "=? and  ("+ InstanceProviderAPI.InstanceColumns.LAST_STATUS_CHANGE_DATE + " BETWEEN '"+ finalDate +"' and '"+curDate+"')";
+        Log.i("Total photo of",formId);
+        Integer totalPhoto = 0;
+        String[] selectionArgs = {InstanceProviderAPI.STATUS_COMPLETE, InstanceProviderAPI.STATUS_SUBMISSION_FAILED,formId};
+        Cursor c = managedQuery(InstanceProviderAPI.InstanceColumns.CONTENT_URI, null, null,null,null);
+        c.moveToFirst();
+        do {
+            try {
+                totalPhoto = totalPhoto + c.getInt(9);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+        }while (c.moveToNext());
+        Log.i("Not sent",Integer.toString(c.getCount()));
+        return totalPhoto;
+
     }
 
     private Cursor getNot_sentCursor(String formId, String finaldate, String curDate) {

@@ -23,6 +23,7 @@ import com.kll.collect.android.R;
 
 import com.kll.collect.android.activities.FormEntryActivity;
 import com.kll.collect.android.application.Collect;
+import com.kll.collect.android.logic.FormController;
 import com.kll.collect.android.preferences.PreferencesActivity;
 import com.kll.collect.android.utilities.FileUtils;
 import com.kll.collect.android.utilities.MediaUtils;
@@ -226,7 +227,7 @@ public class VideoWidget extends QuestionWidget implements IBinaryWidget {
     }
 
 	@Override
-	public void clearAnswer() {
+	public void clearAnswer(FormController formController) {
 		// remove the file
 		deleteMedia();
 
@@ -244,7 +245,7 @@ public class VideoWidget extends QuestionWidget implements IBinaryWidget {
 	}
 
 	@Override
-	public void setBinaryData(Object binaryuri) {
+	public void setBinaryData(Object binaryuri, FormController formController) {
 		// you are replacing an answer. remove the media.
 		if (mBinaryName != null) {
 			deleteMedia();

@@ -14,13 +14,15 @@
 
 package com.kll.collect.android.widgets;
 
+import com.kll.collect.android.logic.FormController;
+
 /**
  * Interface implemented by widgets that need binary data.
  * 
  * @author Carl Hartung (carlhartung@gmail.com)
  */
 public interface IBinaryWidget {
-    public void setBinaryData(Object answer);
+    public void setBinaryData(Object answer, FormController formController);
     public void cancelWaitingForBinaryData();
     public boolean isWaitingForBinaryData();
 }

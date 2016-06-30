@@ -25,6 +25,7 @@ import com.kll.collect.android.activities.FormEntryActivity;
 import com.kll.collect.android.activities.GeoPointActivity;
 import com.kll.collect.android.activities.GeoPointMapActivity;
 import com.kll.collect.android.application.Collect;
+import com.kll.collect.android.logic.FormController;
 import com.kll.collect.android.utilities.CompatibilityUtils;
 
 import android.app.Activity;
@@ -32,7 +33,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -227,7 +227,7 @@ public class GeoPointWidget extends QuestionWidget implements IBinaryWidget, Loc
 		if (s != null && !s.equals("")) {
 			//Toast.makeText(getContext(), prompt.getAnswerText()+" ", Toast.LENGTH_LONG).show();
 			dataAvailable = true;
-			setBinaryData(s);
+			setBinaryData(s, null);
 		}
 		updateButtonLabelsAndVisibility(dataAvailable);
 
@@ -273,7 +273,7 @@ public class GeoPointWidget extends QuestionWidget implements IBinaryWidget, Loc
 	}
 
 	@Override
-	public void clearAnswer() {
+	public void clearAnswer(FormController formController) {
 		mStringAnswer.setText(null);
 		mAnswerDisplay.setText(null);
 		updateButtonLabelsAndVisibility(false);
@@ -343,7 +343,7 @@ public class GeoPointWidget extends QuestionWidget implements IBinaryWidget, Loc
 	}
 
 	@Override
-	public void setBinaryData(Object answer) {
+	public void setBinaryData(Object answer, FormController formController) {
 		String s = (String) answer;
 		mStringAnswer.setText(s);
 

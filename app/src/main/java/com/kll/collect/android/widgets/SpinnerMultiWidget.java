@@ -32,6 +32,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.kll.collect.android.external.ExternalDataUtil;
+import com.kll.collect.android.logic.FormController;
 
 import java.util.Vector;
 
@@ -201,7 +202,7 @@ public class SpinnerMultiWidget extends QuestionWidget {
 
 
     @Override
-    public void clearAnswer() {
+    public void clearAnswer(FormController formController) {
         selectionText.setText(R.string.selected);
         selectionText.setVisibility(View.GONE);
         for (int i = 0; i < selections.length; i++) {

@@ -32,6 +32,7 @@ import com.kll.collect.android.R;
 import com.kll.collect.android.application.Collect;
 import com.kll.collect.android.external.ExternalDataUtil;
 import com.kll.collect.android.external.ExternalSelectChoice;
+import com.kll.collect.android.logic.FormController;
 import com.kll.collect.android.utilities.FileUtils;
 
 import android.content.Context;
@@ -42,7 +43,6 @@ import android.util.TypedValue;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.CompoundButton;
@@ -265,7 +265,7 @@ public class ListWidget extends QuestionWidget implements OnCheckedChangeListene
 
 
     @Override
-    public void clearAnswer() {
+    public void clearAnswer(FormController formController) {
         for (RadioButton button : this.buttons) {
             if (button.isChecked()) {
                 button.setChecked(false);

@@ -39,6 +39,7 @@ import android.widget.ArrayAdapter;
 
 import com.kll.collect.android.external.ExternalDataUtil;
 
+import com.kll.collect.android.logic.FormController;
 import com.kll.collect.android.views.ClearableAutoCompleteTextView;
 
 /**
@@ -179,7 +180,7 @@ public class SpinnerWidget extends QuestionWidget {
     }
 
     @Override
-    public void clearAnswer() {
+    public void clearAnswer(FormController formController) {
         autoCompleteTextView.setText(R.string.select_one);
     }
 

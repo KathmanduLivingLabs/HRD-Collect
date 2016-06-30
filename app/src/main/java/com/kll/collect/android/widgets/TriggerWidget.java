@@ -20,6 +20,7 @@ import org.javarosa.form.api.FormEntryPrompt;
 import com.kll.collect.android.R;
 
 import com.kll.collect.android.application.Collect;
+import com.kll.collect.android.logic.FormController;
 
 import android.content.Context;
 import android.util.TypedValue;
@@ -100,7 +101,7 @@ public class TriggerWidget extends QuestionWidget {
 
 
     @Override
-    public void clearAnswer() {
+    public void clearAnswer(FormController formController) {
         mStringAnswer.setText(null);
         mTriggerButton.setChecked(false);
     }

@@ -22,6 +22,7 @@ import org.javarosa.form.api.FormEntryPrompt;
 
 import com.kll.collect.android.R;
 import com.kll.collect.android.application.Collect;
+import com.kll.collect.android.logic.FormController;
 import com.kll.collect.android.views.MediaLayout;
 
 import android.content.Context;
@@ -172,7 +173,7 @@ public abstract class QuestionWidget extends LinearLayout {
     public abstract IAnswerData getAnswer();
 
 
-    public abstract void clearAnswer();
+    public abstract void clearAnswer(FormController formController);
 
 
     public abstract void setFocus(Context context);

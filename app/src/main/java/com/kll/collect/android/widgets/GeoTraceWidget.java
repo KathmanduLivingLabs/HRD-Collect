@@ -12,6 +12,7 @@ import com.kll.collect.android.R;
 import com.kll.collect.android.activities.FormEntryActivity;
 import com.kll.collect.android.activities.GeoShapeActivity;
 import com.kll.collect.android.application.Collect;
+import com.kll.collect.android.logic.FormController;
 
 import android.app.Activity;
 import android.content.Context;
@@ -95,7 +96,7 @@ public class GeoTraceWidget extends QuestionWidget implements IBinaryWidget {
 			//Toast.makeText(getContext(), prompt.getAnswerText()+" ", Toast.LENGTH_LONG).show();
 			dataAvailable = true;
 			createTraceButton.setText(getContext().getString(R.string.view_trace));
-			setBinaryData(s);
+			setBinaryData(s, null);
 		}else{
 			//Toast.makeText(getContext(), "Nothing", Toast.LENGTH_LONG).show();
 		}
@@ -108,7 +109,7 @@ public class GeoTraceWidget extends QuestionWidget implements IBinaryWidget {
 	}
 
 	@Override
-	public void setBinaryData(Object answer) {
+	public void setBinaryData(Object answer, FormController formController) {
 		// TODO Auto-generated method stub
 		String s = (String) answer.toString();
 		mStringAnswer.setText(s);
@@ -169,7 +170,7 @@ public class GeoTraceWidget extends QuestionWidget implements IBinaryWidget {
 	}
 
 	@Override
-	public void clearAnswer() {
+	public void clearAnswer(FormController formController) {
 		// TODO Auto-generated method stub
 		mStringAnswer.setText(null);
 		mAnswerDisplay.setText(null);

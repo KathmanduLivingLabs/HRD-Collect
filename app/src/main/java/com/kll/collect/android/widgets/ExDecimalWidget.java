@@ -23,6 +23,7 @@ import org.javarosa.form.api.FormEntryPrompt;
 import com.kll.collect.android.activities.FormEntryActivity;
 import com.kll.collect.android.application.Collect;
 import com.kll.collect.android.external.ExternalAppsUtils;
+import com.kll.collect.android.logic.FormController;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
@@ -118,7 +119,7 @@ public class ExDecimalWidget extends ExStringWidget {
      * Allows answer to be set externally in {@Link FormEntryActivity}.
      */
     @Override
-    public void setBinaryData(Object answer) {
+    public void setBinaryData(Object answer, FormController formController) {
         DecimalData decimalData = ExternalAppsUtils.asDecimalData(answer);
         mAnswer.setText( decimalData == null ? null : decimalData.getValue().toString());
     	Collect.getInstance().getFormController().setIndexWaitingForData(null);

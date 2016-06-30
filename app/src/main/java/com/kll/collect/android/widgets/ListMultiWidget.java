@@ -32,6 +32,7 @@ import com.kll.collect.android.R;
 import com.kll.collect.android.application.Collect;
 import com.kll.collect.android.external.ExternalDataUtil;
 import com.kll.collect.android.external.ExternalSelectChoice;
+import com.kll.collect.android.logic.FormController;
 import com.kll.collect.android.utilities.FileUtils;
 
 import android.content.Context;
@@ -278,7 +279,7 @@ public class ListMultiWidget extends QuestionWidget {
 
 
     @Override
-    public void clearAnswer() {
+    public void clearAnswer(FormController formController) {
         for (int i = 0; i < mCheckboxes.size(); i++) {
         	CheckBox c = mCheckboxes.get(i);
             if (c.isChecked()) {

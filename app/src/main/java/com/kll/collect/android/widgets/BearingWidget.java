@@ -22,6 +22,7 @@ import com.kll.collect.android.R;
 import com.kll.collect.android.activities.BearingActivity;
 import com.kll.collect.android.activities.FormEntryActivity;
 import com.kll.collect.android.application.Collect;
+import com.kll.collect.android.logic.FormController;
 
 import android.app.Activity;
 import android.content.Context;
@@ -79,7 +80,7 @@ public class BearingWidget extends QuestionWidget implements IBinaryWidget {
         if (s != null && !s.equals("")) {
             mGetBearingButton.setText(getContext().getString(
                     R.string.replace_bearing));
-            setBinaryData(s);
+            setBinaryData(s, null);
         }
 
         // when you press the button
@@ -105,7 +106,7 @@ public class BearingWidget extends QuestionWidget implements IBinaryWidget {
     }
 
     @Override
-    public void clearAnswer() {
+    public void clearAnswer(FormController formController) {
         mStringAnswer.setText(null);
         mAnswerDisplay.setText(null);
         mGetBearingButton.setText(getContext()
@@ -132,7 +133,7 @@ public class BearingWidget extends QuestionWidget implements IBinaryWidget {
     }
 
     @Override
-    public void setBinaryData(Object answer) {
+    public void setBinaryData(Object answer, FormController formController) {
         String s = (String) answer;
         mStringAnswer.setText(s);
 

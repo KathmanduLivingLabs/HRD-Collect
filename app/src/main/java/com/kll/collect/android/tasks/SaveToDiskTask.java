@@ -34,6 +34,7 @@ import com.kll.collect.android.application.Collect;
 import com.kll.collect.android.exception.EncryptionException;
 import com.kll.collect.android.listeners.FormSavedListener;
 import com.kll.collect.android.logic.FormController;
+import com.kll.collect.android.logic.PropertyManager;
 import com.kll.collect.android.provider.InstanceProviderAPI;
 import com.kll.collect.android.provider.FormsProviderAPI.FormsColumns;
 import com.kll.collect.android.provider.InstanceProviderAPI.InstanceColumns;
@@ -68,6 +69,7 @@ public class SaveToDiskTask extends AsyncTask<Void, String, SaveResult> {
     public static final int VALIDATED = 503;
     public static final int SAVED_AND_EXIT = 504;
 
+    private static final String PHONE_NUMBER = "phonenumber";
 
     public SaveToDiskTask(Uri uri, Boolean saveAndExit, Boolean markCompleted, String updatedName) {
         mUri = uri;
@@ -174,6 +176,7 @@ public class SaveToDiskTask extends AsyncTask<Void, String, SaveResult> {
         values.put(InstanceColumns.RECORDID, getValueFromUserInput("house_no"));
         values.put(InstanceColumns.SURVEYORID,getValueFromUserInput("enumerator_id"));
         values.put(InstanceColumns.CAN_EDIT_WHEN_COMPLETE, Boolean.toString(canEditAfterCompleted));
+        values.put(InstanceColumns.TOTAL_ATACHMENT,formController.getTotalAttachments());
 
         // If FormEntryActivity was started with an Instance, just update that instance
         if (Collect.getInstance().getContentResolver().getType(mUri).equals(InstanceColumns.CONTENT_ITEM_TYPE)) {
@@ -307,7 +310,6 @@ public class SaveToDiskTask extends AsyncTask<Void, String, SaveResult> {
                 // if we are encrypting, the form cannot be reopened afterward
                 canEditAfterCompleted = false;
                 // and encrypt the submission (this is a one-way operation)...
-
                 publishProgress(Collect.getInstance().getString(R.string.survey_saving_encrypting_message));
 
                 EncryptionUtils.generateEncryptedSubmission(instanceXml, submissionXml, formInfo);

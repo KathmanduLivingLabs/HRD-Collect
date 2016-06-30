@@ -33,6 +33,7 @@ import android.widget.Toast;
 import org.javarosa.xpath.expr.XPathFuncExpr;
 
 import com.kll.collect.android.external.ExternalDataUtil;
+import com.kll.collect.android.logic.FormController;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -137,7 +138,7 @@ public class AutoCompleteWidget extends QuestionWidget {
 
 
     @Override
-    public void clearAnswer() {
+    public void clearAnswer(FormController formController) {
         autocomplete.setText("");
     }
 

@@ -32,6 +32,7 @@ import com.kll.collect.android.application.Collect;
 import com.kll.collect.android.external.ExternalDataUtil;
 import com.kll.collect.android.external.ExternalSelectChoice;
 import com.kll.collect.android.listeners.AdvanceToNextListener;
+import com.kll.collect.android.logic.FormController;
 import com.kll.collect.android.utilities.FileUtils;
 import com.kll.collect.android.views.ExpandedHeightGridView;
 import com.kll.collect.android.views.AudioButton.AudioHandler;
@@ -353,7 +354,7 @@ public class GridWidget extends QuestionWidget {
 
 
     @Override
-    public void clearAnswer() {
+    public void clearAnswer(FormController formController) {
         for (int i = 0; i < mItems.size(); ++i) {
             selected[i] = false;
             imageViews[i].setBackgroundColor(Color.WHITE);

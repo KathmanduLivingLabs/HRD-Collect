@@ -295,16 +295,17 @@ public class ODKView extends ScrollView implements OnLongClickListener {
 
     /**
      * Called when another activity returns information to answer this question.
-     * 
+     *
      * @param answer
+     * @param formController
      */
-    public void setBinaryData(Object answer) {
+    public void setBinaryData(Object answer, FormController formController) {
         boolean set = false;
         for (QuestionWidget q : widgets) {
             if (q instanceof IBinaryWidget) {
                 if (((IBinaryWidget) q).isWaitingForBinaryData()) {
                     try {
-                        ((IBinaryWidget) q).setBinaryData(answer);
+                        ((IBinaryWidget) q).setBinaryData(answer,formController);
                     } catch (Exception e) {
                         Log.e(t, e.getMessage(), e);
                         Toast.makeText(getContext(), getContext().getString(R.string.error_attaching_binary_file, e.getMessage()), Toast.LENGTH_LONG).show();
@@ -384,7 +385,7 @@ public class ODKView extends ScrollView implements OnLongClickListener {
         // If there's only one widget, clear the answer.
         // If there are more, then force a long-press to clear the answer.
         if (widgets.size() == 1 && !widgets.get(0).getPrompt().isReadOnly()) {
-            widgets.get(0).clearAnswer();
+            widgets.get(0).clearAnswer(Collect.getInstance().getFormController());
             return true;
         } else {
             return false;

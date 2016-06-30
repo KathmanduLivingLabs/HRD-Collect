@@ -25,6 +25,7 @@ import com.kll.collect.android.activities.FormEntryActivity;
 import com.kll.collect.android.application.Collect;
 import com.kll.collect.android.exception.ExternalParamsException;
 import com.kll.collect.android.external.ExternalAppsUtils;
+import com.kll.collect.android.logic.FormController;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
@@ -202,7 +203,7 @@ public class ExStringWidget extends QuestionWidget implements IBinaryWidget {
     }
 
     @Override
-    public void clearAnswer() {
+    public void clearAnswer(FormController formController) {
     	mAnswer.setText(null);
     }
 
@@ -222,7 +223,7 @@ public class ExStringWidget extends QuestionWidget implements IBinaryWidget {
      * Allows answer to be set externally in {@Link FormEntryActivity}.
      */
     @Override
-    public void setBinaryData(Object answer) {
+    public void setBinaryData(Object answer, FormController formController) {
         StringData stringData = ExternalAppsUtils.asStringData(answer);
         mAnswer.setText(stringData == null ? null : stringData.getValue().toString());
     	Collect.getInstance().getFormController().setIndexWaitingForData(null);

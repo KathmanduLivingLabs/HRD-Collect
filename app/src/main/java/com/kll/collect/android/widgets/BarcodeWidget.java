@@ -21,6 +21,7 @@ import com.kll.collect.android.R;
 
 import com.kll.collect.android.activities.FormEntryActivity;
 import com.kll.collect.android.application.Collect;
+import com.kll.collect.android.logic.FormController;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
@@ -106,7 +107,7 @@ public class BarcodeWidget extends QuestionWidget implements IBinaryWidget {
 	}
 
 	@Override
-	public void clearAnswer() {
+	public void clearAnswer(FormController formController) {
 		mStringAnswer.setText(null);
 		mGetBarcodeButton.setText(getContext().getString(R.string.get_barcode));
 	}
@@ -125,7 +126,7 @@ public class BarcodeWidget extends QuestionWidget implements IBinaryWidget {
 	 * Allows answer to be set externally in {@Link FormEntryActivity}.
 	 */
 	@Override
-	public void setBinaryData(Object answer) {
+	public void setBinaryData(Object answer, FormController formController) {
 		mStringAnswer.setText((String) answer);
 		Collect.getInstance().getFormController().setIndexWaitingForData(null);
 	}

@@ -19,6 +19,7 @@ import org.javarosa.core.model.data.StringData;
 import org.javarosa.form.api.FormEntryPrompt;
 
 import com.kll.collect.android.application.Collect;
+import com.kll.collect.android.logic.FormController;
 
 import android.content.Context;
 import android.text.Editable;
@@ -138,7 +139,7 @@ public class StringWidget extends QuestionWidget {
     }
 
     @Override
-    public void clearAnswer() {
+    public void clearAnswer(FormController formController) {
         mAnswer.setText(null);
     }
 

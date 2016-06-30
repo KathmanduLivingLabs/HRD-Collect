@@ -20,6 +20,7 @@ import org.javarosa.form.api.FormEntryPrompt;
 import org.joda.time.DateTime;
 
 import com.kll.collect.android.application.Collect;
+import com.kll.collect.android.logic.FormController;
 
 import android.content.Context;
 import android.view.Gravity;
@@ -66,7 +67,7 @@ public class TimeWidget extends QuestionWidget {
 
         } else {
             // create time widget with current time as of right now
-            clearAnswer();
+            clearAnswer(Collect.getInstance().getFormController());
         }
 
         mTimePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
@@ -85,9 +86,10 @@ public class TimeWidget extends QuestionWidget {
 
     /**
      * Resets time to today.
+     * @param formController
      */
     @Override
-    public void clearAnswer() {
+    public void clearAnswer(FormController formController) {
         DateTime ldt = new DateTime();
         mTimePicker.setCurrentHour(ldt.getHourOfDay());
         mTimePicker.setCurrentMinute(ldt.getMinuteOfHour());

@@ -30,6 +30,7 @@ import com.kll.collect.android.R;
 import com.kll.collect.android.activities.FormEntryActivity;
 import com.kll.collect.android.activities.GeoShapeActivity;
 import com.kll.collect.android.application.Collect;
+import com.kll.collect.android.logic.FormController;
 
 import android.app.Activity;
 import android.content.Context;
@@ -134,7 +135,7 @@ public class GeoShapeWidget extends QuestionWidget implements IBinaryWidget {
 		if (s != null && !s.equals("")) {
 			//Toast.makeText(getContext(), prompt.getAnswerText()+" ", Toast.LENGTH_LONG).show();
 			dataAvailable = true;
-			setBinaryData(s);
+			setBinaryData(s, null);
 		}else{
 			//Toast.makeText(getContext(), "Nothing", Toast.LENGTH_LONG).show();
 		}
@@ -155,7 +156,7 @@ public class GeoShapeWidget extends QuestionWidget implements IBinaryWidget {
 	}
 
 	@Override
-	public void setBinaryData(Object answer) {
+	public void setBinaryData(Object answer, FormController formController) {
 		// TODO Auto-generated method stub
 		//Toast.makeText(getContext(), answer.toString(), Toast.LENGTH_LONG).show();
 		String s = (String) answer.toString();
@@ -216,7 +217,7 @@ public class GeoShapeWidget extends QuestionWidget implements IBinaryWidget {
 	}
 
 	@Override
-	public void clearAnswer() {
+	public void clearAnswer(FormController formController) {
 		// TODO Auto-generated method stub
 		mStringAnswer.setText(null);
 		mAnswerDisplay.setText(null);

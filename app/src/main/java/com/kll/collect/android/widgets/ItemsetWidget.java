@@ -32,6 +32,7 @@ import com.kll.collect.android.R;
 
 import com.kll.collect.android.application.Collect;
 import com.kll.collect.android.database.ItemsetDbAdapter;
+import com.kll.collect.android.logic.FormController;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -255,7 +256,7 @@ public class ItemsetWidget extends QuestionWidget implements
     }
 
     @Override
-    public void clearAnswer() {
+    public void clearAnswer(FormController formController) {
         mButtons.clearCheck();
         mAnswer = null;
     }

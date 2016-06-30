@@ -23,6 +23,7 @@ import com.kll.collect.android.R;
 
 import com.kll.collect.android.activities.FormEntryActivity;
 import com.kll.collect.android.application.Collect;
+import com.kll.collect.android.logic.FormController;
 import com.kll.collect.android.utilities.FileUtils;
 import com.kll.collect.android.utilities.MediaUtils;
 
@@ -270,7 +271,7 @@ public class AlignedImageWidget extends QuestionWidget implements IBinaryWidget 
 
 
     @Override
-    public void clearAnswer() {
+    public void clearAnswer(FormController formController) {
         // remove the file
         deleteMedia();
         mImageView.setImageBitmap(null);
@@ -292,7 +293,7 @@ public class AlignedImageWidget extends QuestionWidget implements IBinaryWidget 
 
 
     @Override
-    public void setBinaryData(Object newImageObj) {
+    public void setBinaryData(Object newImageObj, FormController formController) {
         // you are replacing an answer. delete the previous image using the
         // content provider.
         if (mBinaryName != null) {

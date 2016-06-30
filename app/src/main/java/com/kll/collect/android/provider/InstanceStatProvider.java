@@ -10,6 +10,7 @@ public class InstanceStatProvider {
     private Integer no_attachment;
     private Integer not_sent;
     private Integer sent;
+    private Integer totalPhoto;
 
     public InstanceStatProvider()
     {
@@ -72,5 +73,12 @@ public class InstanceStatProvider {
 
     public void setFormID(String formID) {
         this.formID = formID;
+    }
+
+    public Integer getTotalPhoto() {
+        return totalPhoto;
+    }
+    public void setTotalPhoto(Integer integer){
+        totalPhoto = integer;
     }
 }

@@ -28,6 +28,7 @@ import com.kll.collect.android.R;
 
 import com.kll.collect.android.external.ExternalDataUtil;
 import com.kll.collect.android.external.ExternalSelectChoice;
+import com.kll.collect.android.logic.FormController;
 import com.kll.collect.android.utilities.FileUtils;
 
 import android.content.Context;
@@ -210,7 +211,7 @@ public class LabelWidget extends QuestionWidget {
 
 
     @Override
-    public void clearAnswer() {
+    public void clearAnswer(FormController formController) {
         // Do nothing, no answers to clear
     }
 

@@ -41,6 +41,8 @@ public final class InstanceProviderAPI {
      * Notes table
      */
     public static final class InstanceColumns implements BaseColumns {
+
+
         // This class cannot be instantiated
         private InstanceColumns() {}
         
@@ -49,6 +51,7 @@ public final class InstanceProviderAPI {
         public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd.geoodk.instance";
 
         // These are the only things needed for an insert
+        public static final String TOTAL_ATACHMENT = "total_attachments";
         public static final String DISPLAY_NAME = "displayName";
         public static final String SUBMISSION_URI = "submissionUri";
         public static final String INSTANCE_FILE_PATH = "instanceFilePath";

@@ -24,6 +24,7 @@ import org.javarosa.form.api.FormEntryPrompt;
 import org.joda.time.DateTime;
 
 import com.kll.collect.android.application.Collect;
+import com.kll.collect.android.logic.FormController;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -205,16 +206,17 @@ public class DateWidget extends QuestionWidget {
                 mDateListener);
         } else {
             // create date widget with current time as of right now
-            clearAnswer();
+            clearAnswer(Collect.getInstance().getFormController());
         }
     }
 
 
     /**
      * Resets date to today.
+     * @param formController
      */
     @Override
-    public void clearAnswer() {
+    public void clearAnswer(FormController formController) {
         DateTime ldt = new DateTime();
         mDatePicker.init(ldt.getYear(), ldt.getMonthOfYear() - 1, ldt.getDayOfMonth(),
             mDateListener);

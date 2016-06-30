@@ -19,6 +19,7 @@ import org.javarosa.form.api.FormEntryPrompt;
 import com.kll.collect.android.R;
 
 import com.kll.collect.android.application.Collect;
+import com.kll.collect.android.logic.FormController;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
@@ -209,7 +210,7 @@ public class ExPrinterWidget extends QuestionWidget implements IBinaryWidget {
     }
 
     @Override
-    public void clearAnswer() {
+    public void clearAnswer(FormController formController) {
     }
 
 
@@ -223,7 +224,7 @@ public class ExPrinterWidget extends QuestionWidget implements IBinaryWidget {
      * Allows answer to be set externally in {@Link FormEntryActivity}.
      */
     @Override
-    public void setBinaryData(Object answer) {
+    public void setBinaryData(Object answer, FormController formController) {
     	Collect.getInstance().getFormController().setIndexWaitingForData(null);
     }
 

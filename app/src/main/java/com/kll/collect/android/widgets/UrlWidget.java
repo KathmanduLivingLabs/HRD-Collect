@@ -20,6 +20,7 @@ import org.javarosa.form.api.FormEntryPrompt;
 import com.kll.collect.android.R;
 
 import com.kll.collect.android.application.Collect;
+import com.kll.collect.android.logic.FormController;
 
 import android.content.Context;
 import android.content.Intent;
@@ -95,7 +96,7 @@ public class UrlWidget extends QuestionWidget {
     }
 
     @Override
-    public void clearAnswer() {
+    public void clearAnswer(FormController formController) {
         Toast.makeText(getContext(), "URL is readonly", Toast.LENGTH_SHORT).show();
     }
 

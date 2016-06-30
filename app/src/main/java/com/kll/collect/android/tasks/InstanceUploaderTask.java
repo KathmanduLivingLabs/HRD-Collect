@@ -43,6 +43,7 @@ import org.opendatakit.httpclientandroidlib.protocol.HttpContext;
 
 import com.kll.collect.android.application.Collect;
 import com.kll.collect.android.listeners.InstanceUploaderListener;
+import com.kll.collect.android.logic.FormController;
 import com.kll.collect.android.logic.PropertyManager;
 import com.kll.collect.android.preferences.PreferencesActivity;
 import com.kll.collect.android.provider.InstanceProviderAPI;
@@ -70,9 +71,11 @@ public class InstanceUploaderTask extends AsyncTask<Long, Integer, InstanceUploa
     private static final int CONNECTION_TIMEOUT = 60000;
     private static final String fail = "Error: ";
 
+
     private InstanceUploaderListener mStateListener;
 
     public static class Outcome {
+
         public Uri mAuthRequestingServer = null;
         public HashMap<String, String> mResults = new HashMap<String,String>();
     }
@@ -240,6 +243,7 @@ public class InstanceUploaderTask extends AsyncTask<Long, Integer, InstanceUploa
                 outcome.mResults.put(id, fail + "Generic Exception: " + msg);
                 cv.put(InstanceColumns.STATUS, InstanceProviderAPI.STATUS_SUBMISSION_FAILED);
                 Collect.getInstance().getContentResolver().update(toUpdate, cv, null, null);
+
                 return true;
             }
         }

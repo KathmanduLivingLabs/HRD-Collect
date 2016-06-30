@@ -88,6 +88,7 @@ public class InstanceProvider extends ContentProvider {
                + InstanceColumns.ENUMAREA + " integer, "
                + InstanceColumns.RECORDID + " integer, "
                + InstanceColumns.SURVEYORID + " integer, "
+               + InstanceColumns.TOTAL_ATACHMENT + " integer default 1, "
                + InstanceColumns.DISPLAY_SUBTEXT + " text not null );");
         }
 
@@ -222,7 +223,7 @@ public class InstanceProvider extends ContentProvider {
         	Collect.getInstance().getActivityLogger().logActionParam(this, "insert",
         			instanceUri.toString(), values.getAsString(InstanceColumns.INSTANCE_FILE_PATH));
             return instanceUri;
-        }
+        }   
 
         throw new SQLException("Failed to insert row into " + uri);
     }
@@ -426,6 +427,7 @@ public class InstanceProvider extends ContentProvider {
         sInstancesProjectionMap.put(InstanceColumns.ENUMAREA, InstanceColumns.ENUMAREA);
         sInstancesProjectionMap.put(InstanceColumns.RECORDID, InstanceColumns.RECORDID);
         sInstancesProjectionMap.put(InstanceColumns.SURVEYORID, InstanceColumns.SURVEYORID);
+        sInstancesProjectionMap.put(InstanceColumns.TOTAL_ATACHMENT, InstanceColumns.TOTAL_ATACHMENT);
     }
 
 }

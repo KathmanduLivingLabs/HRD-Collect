@@ -28,6 +28,7 @@ import org.javarosa.xpath.expr.XPathFuncExpr;
 import com.kll.collect.android.application.Collect;
 import com.kll.collect.android.external.ExternalDataUtil;
 import com.kll.collect.android.external.ExternalSelectChoice;
+import com.kll.collect.android.logic.FormController;
 import com.kll.collect.android.views.MediaLayout;
 
 import android.content.Context;
@@ -133,7 +134,7 @@ public class SelectOneWidget extends QuestionWidget implements
 	}
 
 	@Override
-	public void clearAnswer() {
+	public void clearAnswer(FormController formController) {
 		for (RadioButton button : this.buttons) {
 			if (button.isChecked()) {
 				button.setChecked(false);
