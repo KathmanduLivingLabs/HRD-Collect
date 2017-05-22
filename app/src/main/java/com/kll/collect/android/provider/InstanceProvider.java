@@ -88,7 +88,7 @@ public class InstanceProvider extends ContentProvider {
                + InstanceColumns.ENUMAREA + " integer, "
                + InstanceColumns.RECORDID + " integer, "
                + InstanceColumns.SURVEYORID + " integer, "
-               + InstanceColumns.TOTAL_ATACHMENT + " integer default 1, "
+               + InstanceColumns.TOTAL_ATACHMENT + " integer default 0, "
                + InstanceColumns.DISPLAY_SUBTEXT + " text not null );");
         }
 

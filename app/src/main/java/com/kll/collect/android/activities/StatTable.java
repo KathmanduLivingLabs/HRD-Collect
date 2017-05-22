@@ -371,11 +371,11 @@ public class StatTable extends Activity implements DiskSyncListener{
         }
     }
     private Integer getTotalPhoto(String formId, String finalDate, String curDate) {
-        String selection =  "(" + InstanceProviderAPI.InstanceColumns.STATUS + "=? or "+ InstanceProviderAPI.InstanceColumns.STATUS + "=? ) and " + InstanceProviderAPI.InstanceColumns.JR_FORM_ID + "=? and  ("+ InstanceProviderAPI.InstanceColumns.LAST_STATUS_CHANGE_DATE + " BETWEEN '"+ finalDate +"' and '"+curDate+"')";
+        String selection =  "(" + InstanceProviderAPI.InstanceColumns.STATUS + "=? or " + InstanceProviderAPI.InstanceColumns.STATUS + "=? or " + InstanceProviderAPI.InstanceColumns.STATUS + "=? or "+ InstanceProviderAPI.InstanceColumns.STATUS +"=? or "+ InstanceProviderAPI.InstanceColumns.STATUS + "=?) and (" + InstanceProviderAPI.InstanceColumns.JR_FORM_ID + "=? ) and  ("+ InstanceProviderAPI.InstanceColumns.LAST_STATUS_CHANGE_DATE + " BETWEEN '"+ finalDate +"' and '"+curDate+"')";
         Log.i("Total photo of",formId);
         Integer totalPhoto = 0;
-        String[] selectionArgs = {InstanceProviderAPI.STATUS_COMPLETE, InstanceProviderAPI.STATUS_SUBMISSION_FAILED,formId};
-        Cursor c = managedQuery(InstanceProviderAPI.InstanceColumns.CONTENT_URI, null, null,null,null);
+        String[] selectionArgs = {InstanceProviderAPI.STATUS_COMPLETE,InstanceProviderAPI.STATUS_SUBMITTED, InstanceProviderAPI.STATUS_ATTACHMENT_NOT_SENT , InstanceProviderAPI.STATUS_SUBMISSION_FAILED,InstanceProviderAPI.STATUS_ATTACHMENT_SENDING_FAILED,formId};
+        Cursor c = managedQuery(InstanceProviderAPI.InstanceColumns.CONTENT_URI, null, selection,selectionArgs,null);
         c.moveToFirst();
         do {
             try {

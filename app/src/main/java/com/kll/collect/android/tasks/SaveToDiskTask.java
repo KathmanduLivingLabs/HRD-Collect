@@ -178,6 +178,9 @@ public class SaveToDiskTask extends AsyncTask<Void, String, SaveResult> {
         values.put(InstanceColumns.CAN_EDIT_WHEN_COMPLETE, Boolean.toString(canEditAfterCompleted));
         values.put(InstanceColumns.TOTAL_ATACHMENT,formController.getTotalAttachments());
 
+
+
+
         // If FormEntryActivity was started with an Instance, just update that instance
         if (Collect.getInstance().getContentResolver().getType(mUri).equals(InstanceColumns.CONTENT_ITEM_TYPE)) {
             int updated = Collect.getInstance().getContentResolver().update(mUri, values, null, null);

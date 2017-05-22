@@ -211,6 +211,7 @@ public class FormEntryActivity extends Activity implements AnimationListener,
 
 	// Random ID
 	private static final int DELETE_REPEAT = 654321;
+	private static final String LAST_ATTACHMENTS = "LAST_ATTACHMENT_COUNT";
 
 
 	private String mFormPath;
@@ -794,11 +795,18 @@ public class FormEntryActivity extends Activity implements AnimationListener,
 				}
 				Log.i("Filename of image",String.valueOf(nf));
 				if(nf.exists()){
-					attachments = formController.getTotalAttachments();
-					Log.i("Attachment Before",Integer.toString(attachments));
+							attachments = formController.getTotalAttachments();
+					Log.i("Test controller",Integer.toString(formController.getTotalAttachments()));
+					//Log.i("Attachment Before",Integer.toString(attachments));
 					attachments++;
-					Log.i("Attachment after",Integer.toString(attachments));
+					//Log.i("Attachment after",Integer.toString(attachments));
 					formController.setTotalAttachments(attachments);
+
+					//Used shared preference to store last total attachment count, incase for force close of app and recovery from the cache.
+					SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+					SharedPreferences.Editor editor = preferences.edit();
+					editor.putInt(LAST_ATTACHMENTS,attachments);
+					editor.apply();
 				}
 				if(compressImage)
 					compreesImage(s);
@@ -848,15 +856,26 @@ public class FormEntryActivity extends Activity implements AnimationListener,
 				String sourceImagePath = MediaUtils.getPathFromUri(this, selectedImage, Images.Media.DATA);
 
 				// Copy file to sdcard
-				String mInstanceFolder1 = formController.getInstancePath()
-						.getParent();
+				String mInstanceFolder1 = formController.getInstancePath().getParent();
 				String destImagePath = mInstanceFolder1 + File.separator
 						+ System.currentTimeMillis() + ".jpg";
 
 				File source = new File(sourceImagePath);
 				File newImage = new File(destImagePath);
 				FileUtils.copyFile(source, newImage);
+				if (newImage.exists()){
+					attachments = formController.getTotalAttachments();
+					Log.i("Attachment Before",Integer.toString(attachments));
+					attachments++;
+					Log.i("Attachment after",Integer.toString(attachments));
+					formController.setTotalAttachments(attachments);
 
+					//Used shared preference to store last total attachment count, incase for force close of app and recovery from the cache.
+					SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+					SharedPreferences.Editor editor = preferences.edit();
+					editor.putInt(LAST_ATTACHMENTS,attachments);
+					editor.apply();
+				}
 
 				((ODKView) mCurrentView).setBinaryData(newImage, formController);
 				saveAnswersForCurrentScreen(DO_NOT_EVALUATE_CONSTRAINTS);
@@ -1494,10 +1513,10 @@ public class FormEntryActivity extends Activity implements AnimationListener,
 					ib.setVisibility(View.GONE);
 					ta.setVisibility(View.GONE);
 					tb.setVisibility(View.GONE);
-					d.setText(getString(R.string.buttons_instructions,
+					d.setText(getString(R.string.swipe_instructions,
 							formController.getFormTitle()));
 				} else {
-					d.setText(getString(R.string.swipe_buttons_instructions,
+					d.setText(getString(R.string.swipe_instructions,
 							formController.getFormTitle()));
 				}
 
@@ -3140,6 +3159,9 @@ public class FormEntryActivity extends Activity implements AnimationListener,
 		// savepoint for that
 		// form is newer than the last saved version of their form data.
 		if (hasUsedSavepoint) {
+			SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+			attachments = preferences.getInt(LAST_ATTACHMENTS,0);
+			formController.setTotalAttachments(attachments	);
 			runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
@@ -3334,6 +3356,10 @@ public class FormEntryActivity extends Activity implements AnimationListener,
 				isSaved = true;
 				sendSavedBroadcast();
 				finishReturnInstance();
+				SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+				SharedPreferences.Editor editor = preferences.edit();
+				editor.putInt(LAST_ATTACHMENTS,0);
+				editor.apply();
 				break;
 			case SaveToDiskTask.SAVE_ERROR:
 				String message;
