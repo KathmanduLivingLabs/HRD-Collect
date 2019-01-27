@@ -1277,9 +1277,8 @@ public class FormEntryActivity extends Activity implements AnimationListener,
 				+ formController.getFormTitle());*/
 		int questioncount = formController.getFormDef().getDeepChildCount();
 		if(formController.currentPromptIsQuestion()){
-
-
 			if(mDistrict != null){
+				Log.wtf(mDistrict,"district");
 				if (mDistrict.equals(getValueFromUserInput("district"))) {
 					Log.wtf("District", "Same");
 				}else{
@@ -1315,13 +1314,11 @@ public class FormEntryActivity extends Activity implements AnimationListener,
 				mRecord_Id = getLatestUniqueIdFromDb(getValueFromUserInput("district"),getValueFromUserInput("vdc"), getValueFromUserInput("ward"),getValueFromUserInput("enumeration_area"));
 			}
 
-
-
 			if(mVdc != null){
+				Log.wtf(mVdc,"vdc");
 				if (mVdc.equals(getValueFromUserInput("vdc"))) {
 					Log.wtf("VDC", "Same");
 				}else{
-					Log.wtf("VDC","Changed");
 					initialVdcAnswer = formController.getQuestionPrompt(vdcIndex).getAnswerValue();
 					mVdc = getValueFromUserInput("vdc");
 					mRecord_Id = getLatestUniqueIdFromDb(getValueFromUserInput("district"), getValueFromUserInput("vdc"), getValueFromUserInput("ward"), getValueFromUserInput("enumeration_area"));
@@ -1357,6 +1354,7 @@ public class FormEntryActivity extends Activity implements AnimationListener,
 
 
 			if(mWard != null){
+				Log.wtf(mWard,"ward");
 				if (mWard.equals(getValueFromUserInput("ward"))) {
 					Log.wtf("Ward", "Same");
 				}else{
@@ -3245,35 +3243,35 @@ public class FormEntryActivity extends Activity implements AnimationListener,
 
 
 	public void setQuestionIndex(FormController formController){
-		districtIndex = formController.getIndexFromXPath("question./NHRP_dec_4/building_damage_assessment[1]/hh_data[1]/hh_address[1]/hh_address_district[1]/district[1]");
+		districtIndex = formController.getIndexFromXPath("question./NHRP_II/building_damage_assessment[1]/hh_data[1]/hh_address[1]/hh_address_district[1]/district[1]");
 		if(districtIndex == null){
-			districtIndex = formController.getIndexFromXPath("question./Training_form_dec21/building_damage_assessment[1]/hh_data[1]/hh_address[1]/hh_address_district[1]/district[1]");
+			districtIndex = formController.getIndexFromXPath("question./NHRP_II_test/building_damage_assessment[1]/hh_data[1]/hh_address[1]/hh_address_district[1]/district[1]");
 			Log.wtf("District","Index Still Null");
 		}
-		vdcIndex = formController.getIndexFromXPath("question./NHRP_dec_4/building_damage_assessment[1]/hh_data[1]/hh_address[1]/hh_address_vdc[1]/vdc[1]");
+		vdcIndex = formController.getIndexFromXPath("question./NHRP_II/building_damage_assessment[1]/hh_data[1]/hh_address[1]/hh_address_vdc[1]/vdc[1]");
 		if (vdcIndex == null){
-			vdcIndex = formController.getIndexFromXPath("question./Training_form_dec21/building_damage_assessment[1]/hh_data[1]/hh_address[1]/hh_address_vdc[1]/vdc[1]");
+			vdcIndex = formController.getIndexFromXPath("question./NHRP_II_test/building_damage_assessment[1]/hh_data[1]/hh_address[1]/hh_address_vdc[1]/vdc[1]");
 			Log.wtf("VDC","Index Still Null");
 		}
-		wardIndex = formController.getIndexFromXPath("question./NHRP_dec_4/building_damage_assessment[1]/hh_data[1]/hh_address[1]/hh_address_ward[1]/ward[1]");
+		wardIndex = formController.getIndexFromXPath("question./NHRP_II/building_damage_assessment[1]/hh_data[1]/hh_address[1]/hh_address_ward[1]/ward[1]");
 		if (wardIndex == null){
-			wardIndex = formController.getIndexFromXPath("question./Training_form_dec21/building_damage_assessment[1]/hh_data[1]/hh_address[1]/hh_address_ward[1]/ward[1]");
+			wardIndex = formController.getIndexFromXPath("question./NHRP_II_test/building_damage_assessment[1]/hh_data[1]/hh_address[1]/hh_address_ward[1]/ward[1]");
 			Log.wtf("Ward", "Index Still Null");
 		}
-		enumAreaIndex = formController.getIndexFromXPath("question./NHRP_dec_4/building_damage_assessment[1]/hh_data[1]/hh_address[1]/hh_address_ward[1]/enumeration_area[1]");
+		enumAreaIndex = formController.getIndexFromXPath("question./NHRP_II/building_damage_assessment[1]/hh_data[1]/hh_address[1]/hh_address_ward[1]/enumeration_area[1]");
 		if (enumAreaIndex== null){
-			enumAreaIndex = formController.getIndexFromXPath("question./Training_form_dec21/building_damage_assessment[1]/hh_data[1]/hh_address[1]/hh_address_ward[1]/enumeration_area[1]");
+			enumAreaIndex = formController.getIndexFromXPath("question./NHRP_II_test/building_damage_assessment[1]/hh_data[1]/hh_address[1]/hh_address_ward[1]/enumeration_area[1]");
 			Log.wtf("Enumeration Area","Index Still Null");
 		}
-		recordIdIndex = formController.getIndexFromXPath("question./NHRP_dec_4/building_damage_assessment[1]/hh_data[1]/hh_address[1]/hh_address_ward[1]/house_no[1]");
+		recordIdIndex = formController.getIndexFromXPath("question./NHRP_II/building_damage_assessment[1]/hh_data[1]/hh_address[1]/hh_address_ward[1]/house_no[1]");
 		if (recordIdIndex == null){
-			recordIdIndex = formController.getIndexFromXPath("question./Training_form_dec21/building_damage_assessment[1]/hh_data[1]/hh_address[1]/hh_address_ward[1]/house_no[1]");
+			recordIdIndex = formController.getIndexFromXPath("question./NHRP_II_test/building_damage_assessment[1]/hh_data[1]/hh_address[1]/hh_address_ward[1]/house_no[1]");
 			Log.wtf("Record ID", "Index Still Null");
 
 		}
-		surveyorIdIndex = formController.getIndexFromXPath("question./NHRP_dec_4/building_damage_assessment[1]/start_page[1]/enumerator_id[1]");
+		surveyorIdIndex = formController.getIndexFromXPath("question./NHRP_II/building_damage_assessment[1]/start_page[1]/enumerator_id[1]");
 		if (surveyorIdIndex == null){
-			surveyorIdIndex = formController.getIndexFromXPath("question./Training_form_dec21/building_damage_assessment[1]/start_page[1]/enumerator_id[1]");
+			surveyorIdIndex = formController.getIndexFromXPath("question./NHRP_II_test/building_damage_assessment[1]/start_page[1]/enumerator_id[1]");
 			Log.wtf("Surveyor ID", "Index Still Null");
 		}
 	}

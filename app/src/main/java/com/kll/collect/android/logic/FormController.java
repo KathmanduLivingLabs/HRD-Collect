@@ -928,6 +928,7 @@ public class FormController {
 
     public FormEntryPrompt getQuestionPrompt(FormIndex index) {
         return mFormEntryController.getModel().getQuestionPrompt(index);
+
     }
 
 
