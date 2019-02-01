@@ -246,7 +246,7 @@ public class FormEntryActivity extends Activity implements AnimationListener,
 	String mVdc = null;
 	String mWard = null;
 	String mEnum_Area = null;
-	Integer mRecord_Id = null;
+	Integer mRecord_Id = 10001;
 	String mSurveyorId = null;
 
 	String firstLoadDistrict = null;
@@ -639,9 +639,6 @@ public class FormEntryActivity extends Activity implements AnimationListener,
 								firstLoadWard = mWard;
 								firstLoadEnumArea = mWard;
 								firstLoadRecordId = mRecord_Id;
-
-
-
 							}
 						}
 					} finally {
