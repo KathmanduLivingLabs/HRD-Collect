@@ -631,7 +631,7 @@ public class FormEntryActivity extends Activity implements AnimationListener,
 									mRecord_Id = getLatestUniqueIdFromDb(mDistrict, mVdc, mWard, mEnum_Area);
 									Log.wtf("Record ID", String.valueOf(mRecord_Id));
 								} else{
-									mRecord_Id = 1;
+									mRecord_Id = 10001;
 								}
 								latestInstance.close();
 								firstLoadDistrict = mDistrict;
@@ -3303,7 +3303,7 @@ public class FormEntryActivity extends Activity implements AnimationListener,
 		}
 
 
-		return 1;
+		return 10001;
 	}
 
 	private void setInitialValuesForSix(FormController fc){
